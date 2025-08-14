@@ -14,14 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with Cleanflight.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
- /**See Datasheet of the WA STM32F405XG**/
-/**Base of the RIZA**/
+
+/* 
+*#define SPI1_SCK_PIN           PA5
+*#define SPI1_MISO_PIN   	    PA6
+*#define SPI1_MOSI_PIN   	    PA7
+*#define BMI160_CS_PIN          PA4
+*/ 
+/**See Datasheet of the WA STM32F405XG**/
+/**Base of the RIZA but as Dual IMU  and 8PWM**/
 
 #pragma once
 
-#define TARGET_BOARD_IDENTIFIER "SYND_F405"
-#define USBD_PRODUCT_STRING  "SYNERDUINOSTM_F405"
+#define TARGET_BOARD_IDENTIFIER "SYND_F405A"
+#define USBD_PRODUCT_STRING  "SYNERDUINOSTM_F405A"
 
 #define LED0                    PB2  //Blue
 #define LED1                    PA13  //Green
@@ -30,30 +36,52 @@
 #define BEEPER_INVERTED
 #define BEEPER_PWM_FREQUENCY    2500
 
-// *************** SPI2 Gyro & ACC **********************
+// *************** IMU generic ***********************
+#define USE_DUAL_GYRO
+
+// *************** SPI1 Gyro & ACC ICM MPU **********************
+#define USE_SPI
+#define USE_SPI_DEVICE_1
+
+#define SPI1_SCK_PIN            PA5
+#define SPI1_MISO_PIN   	    PA6
+#define SPI1_MOSI_PIN   	    PA7
+
+// **** MPU IMU ****//
+#define USE_IMU_MPU6000
+#define IMU_MPU6000_ALIGN       CW90_DEG
+#define MPU6000_CS_PIN           PA4
+#define MPU6000_SPI_BUS          BUS_SPI1
+
+#define USE_IMU_MPU9250
+#define IMU_MPU9250_ALIGN        CW90_DEG
+#define MPU9250_CS_PIN           PA4
+#define MPU9250_SPI_BUS          BUS_SPI1
+
+#define USE_IMU_MPU6500
+#define IMU_MPU6500_ALIGN        CW90_DEG
+#define MPU6500_CS_PIN           PA4
+#define MPU6500_SPI_BUS          BUS_SPI1
+
+// **** ICM IMU ****// 
+#define USE_IMU_ICM20689
+#define IMU_ICM20689_ALIGN        CW90_DEG
+#define ICM20689_CS_PIN           PA4
+#define ICM20689_SPI_BUS          BUS_SPI1
+
+#define USE_IMU_ICM42605
+#define IMU_ICM42605_ALIGN        CW90_DEG
+#define ICM42605_CS_PIN           PA4
+#define ICM42605_SPI_BUS          BUS_SPI1
+
+
+// *************** SPI2 Gyro & ACC  BMI BNO **********************
 #define USE_SPI
 #define USE_SPI_DEVICE_2
 
 #define SPI2_SCK_PIN            PB13
 #define SPI2_MISO_PIN   	    PC2
 #define SPI2_MOSI_PIN   	    PC3
-
-// **** MPU IMU ****// 
-
-#define USE_IMU_MPU6000
-#define IMU_MPU6000_ALIGN       CW90_DEG
-#define MPU6000_CS_PIN          PB12
-#define MPU6000_SPI_BUS         BUS_SPI2
-
-#define USE_IMU_MPU9250
-#define IMU_MPU9250_ALIGN       CW90_DEG
-#define MPU9250_CS_PIN          PB12
-#define MPU9250_SPI_BUS         BUS_SPI2
-
-#define USE_IMU_MPU6500
-#define IMU_MPU6500_ALIGN       CW90_DEG
-#define MPU6500_CS_PIN          PB12
-#define MPU6500_SPI_BUS         BUS_SPI2
 
 // **** BMI IMU ****// 
 #define USE_IMU_BMI088
@@ -66,22 +94,10 @@
 #define BMI160_CS_PIN          PB12
 #define BMI160_SPI_BUS         BUS_SPI2
 
-
 #define USE_IMU_BMI270
 #define IMU_BMI270_ALIGN       CW270_DEG
 #define BMI270_CS_PIN          PB12
 #define BMI270_SPI_BUS         BUS_SPI2
-
-// **** ICM IMU ****// 
-#define USE_IMU_ICM20689
-#define IMU_ICM20689_ALIGN       CW90_DEG
-#define ICM20689_CS_PIN          PB12
-#define ICM20689_SPI_BUS         BUS_SPI2
-
-#define USE_IMU_ICM42605
-#define IMU_ICM42605_ALIGN       CW90_DEG
-#define ICM42605_CS_PIN          PB12
-#define ICM42605_SPI_BUS         BUS_SPI2
 
 // **** BNO IMU ****// 
 #define USE_IMU_BNO055
@@ -90,9 +106,9 @@
 #define BNO055_SPI_BUS         BUS_SPI2
 
 // **** SPI OSD ****// 
-#define USE_MAX7456
-#define MAX7456_SPI_BUS         BUS_SPI2
-#define MAX7456_CS_PIN          PC1
+//#define USE_MAX7456
+//#define MAX7456_SPI_BUS         BUS_SPI2
+//#define MAX7456_CS_PIN          PC1
 
 // *************** SPI3 Flash/SD Card  ****************uncomment to use SPI3
 //#define USE_SPI_DEVICE_3
@@ -142,6 +158,7 @@
 #define MAG_I2C_BUS             BUS_I2C2
 #define USE_MAG_HMC5883
 #define USE_MAG_QMC5883
+#define USE_MAG_QMC5883P
 #define USE_MAG_IST8310
 #define USE_MAG_MAG3110
 #define USE_MAG_LIS3MDL
@@ -219,10 +236,10 @@
 #define AIRSPEED_ADC_CHANNEL        ADC_CHN_4
 
 // *************** PINIO ***************************
-#define USE_PINIO
-#define USE_PINIOBOX
-#define PINIO1_PIN                  PA4
-#define PINIO2_PIN                  PA5
+//#define USE_PINIO
+//#define USE_PINIOBOX
+//#define PINIO1_PIN                  PA4
+//#define PINIO2_PIN                  PA5
 
 // *************** LEDSTRIP ************************
 #define USE_LED_STRIP
