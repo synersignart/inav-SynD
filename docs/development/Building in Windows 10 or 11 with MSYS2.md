@@ -59,10 +59,17 @@ cat /c/Workspace/inav/cmake/arm-none-eabi-checks.cmake | grep "set(arm_none_eabi
 3. Find the version you need from the [releases page](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/), then either:
 - Download the "...-win32-x64.zip" and copy the folder inside, or
 - Right-click, choose "Copy link address" and paste it into the following commands:
+
+INAV 6 - xpack-arm-none-eabi-gcc-10.2.1-1.1
+INAV 7 - xpack-arm-none-eabi-gcc-10.3.1-2.2
+INAV 8 - xpack-arm-none-eabi-gcc-13.2.1-1.1
 ```
 cd /c/Workspace/xpack
 # paste the link after "wget"
 wget https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v10.2.1-1.1/xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip
+
+
+
 # paste the file name after "unzip"
 unzip xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip
 # you can delete the zip file after as it is no longer needed
@@ -70,7 +77,9 @@ rm xpack-arm-none-eabi-gcc-10.2.1-1.1-win32-x64.zip
 ```
 3. This is important. Put the toolkit first before your path so that it is picked up ahead of any other versions that may be present on your system:
 ```
-export PATH=/c/Workspace/xpack/xpack-arm-none-eabi-gcc-10.2.1-1.1/bin:$PATH
+INAV 6 - export PATH=/c/Workspace/xpack/xpack-arm-none-eabi-gcc-10.2.1-1.1/bin:$PATH
+INAV 7 - export PATH=/c/Workspace/xpack/xpack-arm-none-eabi-gcc-10.3.1-2.2/bin:$PATH
+INAV 8 - export PATH=/c/Workspace/xpack/xpack-arm-none-eabi-gcc-13.2.1-1.1/bin:$PATH
 ```
 ## Building the INAV firmware
 1. Create the build directory:
